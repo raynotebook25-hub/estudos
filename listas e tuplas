@@ -1,0 +1,82 @@
+lista_equipes = []
+ 
+while True: 
+    print("===== MENU =====")
+    print("1. Adicionar equipe")
+    print("2. Media das equipes")
+    print("3. Classificação")
+    print("4. Sair")
+    opção = int(input("Escolha uma opção: "))
+
+    if opção == 1:
+     nome = input("Escreva o nome da equipe: ")
+      
+     pontuacoes = []
+     
+     for i in range(1, 4):
+      
+       print(f"---Pontuação {i} partida ---")
+       futebol = (int(input("Futebol: ")))
+       basquete = (int(input("Basquete: ")))
+       volei = (int(input("Vôlei: ")))
+       corrida = (int(input("Corrida: ")))
+       handebol = (int(input("Handebol: ")))
+      
+       total_partida = futebol + basquete + volei + corrida + handebol 
+       pontuacoes.append(total_partida)
+
+     equipe = (nome, pontuacoes)
+     lista_equipes.append(equipe)
+
+    elif opção == 2: 
+      
+      medias = []
+      
+      for equipe in lista_equipes:
+          pontuacoes = equipe[1]
+
+          soma = 0 
+          for p in pontuacoes:
+            soma = soma + p 
+
+          media = soma / len(pontuacoes) # len  conta quantos elementos tem dentro de algo
+          medias.append(media)
+      
+      medias.sort(reverse=True)
+
+      print(f"{nome}", medias)
+
+    elif opção == 3:
+
+         classificacao = []
+
+         for equipe in lista_equipes:
+            nome = equipe[0]
+            pontuacoes = equipe[1]
+
+            soma = 0
+            for p in pontuacoes:
+                soma = soma + p
+
+            media = soma / len(pontuacoes)
+            classificacao.append((nome, media))
+
+        # ordenar classificação pela média (decrescente)
+         for i in range(len(classificacao)):
+            for j in range(i + 1, len(classificacao)):
+                if classificacao[i][1] < classificacao[j][1]:
+                    aux = classificacao[i]
+                    classificacao[i] = classificacao[j]
+                    classificacao[j] = aux
+
+         print("==== CLASSIFICAÇÃO ====")
+         for equipe in classificacao:
+            print(equipe[0], "- Média:", equipe[1])
+
+    elif opção == 4:
+       print("Saindo...")
+       break
+
+    else:
+       print("Opção inexistente, tente novamente...")
+
